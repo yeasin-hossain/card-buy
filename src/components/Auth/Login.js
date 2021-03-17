@@ -31,7 +31,7 @@ function Login() {
 		}
 	};
 	return (
-		<div>
+		<div className="Login">
 			<h4 className="centerFlex mt-3">Login With Social</h4>
 			<div className="centerFlex">
 				<button

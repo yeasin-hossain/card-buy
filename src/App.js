@@ -6,6 +6,7 @@ import PrivateRoute from './components/Route/PrivateRoute';
 import LoginRoute from './components/Route/LoginRoute';
 import Profile from './components/User/Profile';
 import Header from './components/Nav/Header';
+import Teams from './components/Shop/Teams/Teams';
 
 function App() {
 	return (
@@ -24,6 +25,12 @@ function App() {
 				<PrivateRoute path="/preview">
 					<CartPreview />
 				</PrivateRoute>
+				<PrivateRoute path="/teams/:team">
+					<Teams />
+				</PrivateRoute>
+				<Route path="*">
+					<Layout />
+				</Route>
 			</Switch>
 		</Router>
 	);
