@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from 'react';
+import { createContext, useEffect, useReducer, useState } from 'react';
 import { userReducer } from './UserReducer';
 
 export const stateContext = createContext();
@@ -6,7 +6,11 @@ export const stateContext = createContext();
 export const StateProvider = (props) => {
 	const [userLoggedIn, setUserLoggedIn] = useState(false);
 
-	const [user, userDispatch] = useReducer(userReducer, true);
+	const [user, userDispatch] = useReducer(userReducer, {});
+
+	useEffect(() => {
+		user.isLoggedIn ? setUserLoggedIn(true) : setUserLoggedIn(false);
+	}, [user]);
 
 	const AllContext = {
 		userLoggedIn,

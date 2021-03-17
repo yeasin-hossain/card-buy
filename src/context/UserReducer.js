@@ -1,20 +1,13 @@
-import {
-	initializeFirebase,
-	LoginWIthGoogleIcon,
-} from '../firebase/firebaseutility';
-initializeFirebase();
-
 export const userReducer = (state, action) => {
 	switch (action.type) {
 		case 'LOG_IN':
-			return LoginWIthGoogleIcon().then((res) => {
-				console.log(res.user);
-			});
+			return action.user;
+		case 'SIGN_OUT':
+			return action.user;
 
-		case 'LOG_OUT':
-			return false;
 		case 'IS_VERIFIED':
 			return true;
+
 		default:
 			return state;
 	}

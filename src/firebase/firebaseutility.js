@@ -8,12 +8,45 @@ export const initializeFirebase = () => {
 	}
 };
 
+const userInfo = (info) => {
+	const { displayName, email, photoURL, uid, emailVerified } = info?.user;
+	const UserInfo = {
+		isLoggedIn: true,
+		name: displayName,
+		email: email,
+		image: photoURL,
+		uuid: uid,
+		emailVerified: emailVerified,
+	};
+	return UserInfo;
+};
+
 export const LoginWIthGoogleIcon = () => {
 	const provider = new firebase.auth.GoogleAuthProvider();
 	return firebase
 		.auth()
 		.signInWithPopup(provider)
 		.then((res) => {
-			return res;
+			return userInfo(res);
 		});
+};
+
+export const LoginWIthFbIcon = () => {
+	const provider = new firebase.auth.FacebookAuthProvider();
+	return firebase
+		.auth()
+		.signInWithPopup(provider)
+		.then((res) => {
+			console.log(res);
+			return userInfo(res);
+		})
+		.catch((err) => console.log(err));
+};
+
+export const SignOut = () => {
+	return firebase
+		.auth()
+		.signOut()
+		.then(() => true)
+		.catch(() => false);
 };

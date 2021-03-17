@@ -2,27 +2,27 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Login from './components/Auth/Login';
 import Layout from './components/Layout/Layout';
 import CartPreview from './components/Order/CartPreview';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-// import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PrivateRoute from './components/Route/PrivateRoute';
+import LoginRoute from './components/Route/LoginRoute';
 import Profile from './components/User/Profile';
+import Header from './components/Nav/Header';
 
 function App() {
 	return (
 		<Router>
+			<Header />
 			<Switch>
-				<Route path="/">
+				<Route exact path="/">
 					<Layout />
 				</Route>
-				<Route path="/login">
+				<LoginRoute path="/login">
 					<Login />
-				</Route>
-				<PrivateRoute>
-					<Route path="/preview">
-						<CartPreview />
-					</Route>
-					<Route path="/profile">
-						<Profile />
-					</Route>
+				</LoginRoute>
+				<PrivateRoute path="/profile">
+					<Profile />
+				</PrivateRoute>
+				<PrivateRoute path="/preview">
+					<CartPreview />
 				</PrivateRoute>
 			</Switch>
 		</Router>
