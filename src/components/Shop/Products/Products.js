@@ -1,22 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Product from './Product';
-import axios from 'axios';
+import { stateContext } from '../../../context/StateContext';
 function Products() {
-	const [leagues, setLeagues] = useState([]);
-	useEffect(
-		() =>
-			(async () => {
-				const getData = await axios.get(
-					`https://www.thesportsdb.com/api/v1/json/1/all_leagues.php`
-				);
-				console.log(getData.data.leagues);
-				setLeagues(getData.data.leagues);
-			})(),
-		[]
-	);
+	const { allLeague } = useContext(stateContext);
+
 	return (
 		<div className="d-flex justify-content-center flex-wrap ">
-			{leagues.map((league, index) => (
+			{allLeague.map((league, index) => (
 				<Product key={index} league={league} />
 			))}
 		</div>
